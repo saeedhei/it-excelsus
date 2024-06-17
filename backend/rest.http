@@ -1,0 +1,27 @@
+# POST http://localhost:8000/api/cities HTTP/1.1
+# content-type: application/json
+
+# {
+#     "cityName": "Frankfurt",
+#     "count": 20000000
+# }
+
+
+
+# PUT http://localhost:8000/api/cities/666ca555d45b9a7a6b41f533 HTTP/1.1
+# content-type: application/json
+
+# {
+#     "cityName": "Frankfurt",
+#     "count": 524
+# }
+
+
+
+# DELETE http://localhost:8000/api/cities/666cb4e17a8b29a76f8f9dc0 HTTP/1.1
+
+
+# DELETE http://localhost:8000/api/cities HTTP/1.1
+
+
+
