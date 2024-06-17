@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CityData from '../types/city.type';
+import CityDataService from "../services/city.service";
 
 type SearchResultsProps = {
   results: CityData[];
@@ -28,22 +29,39 @@ const SearchResults: React.FC<SearchResultsProps> = ({
 
   const handleSaveClick = async () => {
     if (editingCity) {
-      await fetch(`http://localhost:8000/api/cities/${editingCity._id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ cityName: editedName, count: editedCount }),
-      });
+      // await fetch(`http://localhost:8000/api/cities/${editingCity._id}`, {
+      //   method: 'PUT',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({ cityName: editedName, count: editedCount }),
+      // });
+      const data: object = {
+        cityName: editedName,
+        count: editedCount,
+      };
+
+      try {
+        const response = await CityDataService.updateCity(data, editingCity._id);
+        console.log(response.data);
+      } catch (e) {
+        console.error(e);
+      }
       setEditingCity(null);
       onSearch(); // Refresh the list
     }
   };
 
   const handleDeleteClick = async (id: string) => {
-    await fetch(`http://localhost:8000/api/cities/${id}`, {
-      method: 'DELETE',
-    });
+    // await fetch(`http://localhost:8000/api/cities/${id}`, {
+    //   method: 'DELETE',
+    // });
+    try {
+      const response = await CityDataService.deleteCity(id);
+      console.log(response.data);
+    } catch (e) {
+      console.error(e);
+    }
     onSearch(); // Refresh the list
   };
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CityDataService from "../services/city.service";
 
 type SearchResultsProps = {
   onSearch: (query?: string) => void; 
@@ -10,13 +11,24 @@ const AddCity: React.FC<SearchResultsProps> = ({ onSearch }) => {
 
   const handleAddCity = async (e: React.FormEvent) => {
     e.preventDefault();
-    await fetch('http://localhost:8000/api/cities', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ cityName, count }),
-    });
+    // await fetch('http://localhost:8000/api/cities', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ cityName, count }),
+    // });
+    const data: object = {
+      cityName: cityName,
+      count: count,
+    };
+
+    try {
+      const response = await CityDataService.createCity(data);
+      console.log(response.data);
+    } catch (e) {
+      console.error(e);
+    }
     setCityName('');
     setCount(0);
     onSearch(cityName);
