@@ -1,9 +1,16 @@
 import http from "../axios-http";
 import CityData from "../types/city.type";
 
+type SearchCitiesProps = {
+  totalPages: number;
+  currentPage: number;
+  cities: CityData[]
+};
+
 class CityDataService {
-  searchCities(query: string, page: number, limit: number) {
-    return http.get<Array<CityData>>(`/cities?search=${query}&page=${page}&limit=${limit}`);
+
+  searchCities(query: string, page: number) {
+    return http.get<SearchCitiesProps>(`/cities?search=${query}&page=${page}&limit=5`);
   }
 
   readCity(id: string) {

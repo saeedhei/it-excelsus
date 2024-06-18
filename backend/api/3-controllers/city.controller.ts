@@ -31,7 +31,7 @@ export const searchCities = async (req: Request, res: Response) => {
 
     const count = await City.countDocuments(condition);
 
-      // Just for Test 
+      // Just for Test, *** we don't need for real senario ***
       if (count){
         res.json({
           link: "http://localhost:8000/api/cities?search=&page=1&limit=5",

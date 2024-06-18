@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CityData from '../types/city.type';
 import CityDataService from "../services/city.service";
+import './SearchResults.css';
 
 type SearchResultsProps = {
   results: CityData[];
@@ -92,14 +93,14 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             ) : (
               <div>
                 {city.cityName} - {city.count}
-                <button onClick={() => handleEditClick(city)}>Edit</button>
-                <button onClick={() => handleDeleteClick(city._id)}>Delete</button>
+                <button className="edit" onClick={() => handleEditClick(city)}>Edit</button>
+                <button className="delete" onClick={() => handleDeleteClick(city._id)}>Delete</button>
               </div>
             )}
           </li>
         ))}
       </ul>
-      <div>
+      <div className="pagination">
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
